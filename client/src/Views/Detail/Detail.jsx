@@ -1,11 +1,12 @@
 import React from 'react';
-import style from './home.module.css';
+import style from './Detail.module.css';
 
-function Home() {
+function Detail() {
   return (
     <div className={style.container}>
+      Detail
     </div>
   )
 }
 
-export default Home;
+export default Detail
