@@ -76,9 +76,20 @@ const newDogDB = async (image, name, height, weight, life_span, temperament) => 
 
 const getTemperament = async () => {
     const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
-    return temperamentApi.data.resu
+    temperamentApi.data.forEach(async (dog) => {
+        if(dog.temperament){
+            let temps = dog.temperament.split(', ');
+            temps.forEach(async (temp) => {
+                await Temperament.findOrCreate({
+                    where: {
+                        name: temp,
+                    },
+                });
+            });
+        }
+    });
     const temperamentDB = await Temperament.findAll();
-    return temperaments;
+    return temperamentDB;
 };
 
 module.exports = {

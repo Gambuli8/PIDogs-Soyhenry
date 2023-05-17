@@ -5,7 +5,6 @@ import Landing from './Views/Landing/landing';
 import Create from './Views/Create/Create';
 import NavBar from './Components/NavBar/NavBar';
 import Detail from './Views/Detail/Detail';
-import Favorite from './Views/Favorite/Favorite';
 
 function App() {
   const { pathname } = useLocation();
@@ -16,8 +15,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/crear" element={<Create />} />
-        <Route path="/detalle" element={<Detail />} />
-        <Route path="/favoritos" element={<Favorite />} />
+        <Route path="/detalle/:name" element={<Detail />} />
       </Routes>
     </div>
   );
