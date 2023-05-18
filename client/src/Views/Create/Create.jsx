@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './Create.module.css';
+import { PostDogs } from '../../Redux/Actions/Actions';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function Create() {
 
@@ -9,8 +11,11 @@ function Create() {
     weight: '',
     height: '',
     life_span: '',
+    image: '',
     temperaments: [],
   });
+
+  const dispatch = useDispatch();
   
 
   // esta funcion se encarga de capturar los datos que se ingresan en los inputs
@@ -31,6 +36,7 @@ function Create() {
     weight: 'Peso ',
     height: 'Altura ',
     life_span: 'Años de vida ',
+    image: ' url de la Imagen ',
     temperaments: 'Temperamentos ',
   });
 
@@ -115,7 +121,7 @@ function Create() {
   // esta funcion se encarga de enviar los datos al back
   const handlerSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
+    dispatch(PostDogs(state));
   };
   return (
     <div className={style.container}>
@@ -128,11 +134,8 @@ function Create() {
             <input type="text" className={style.input} name='weight' placeholder={Errors.weight} onChange={handlerChange} />
             <input type="text" className={style.input} name='life_span' placeholder={Errors.life_span} onChange={handlerChange} />
             <input type="text" className={style.input} name='height' placeholder={Errors.height} onChange={handlerChange} />
-            <select name="temperaments" className={style.input}>
-                <option>Temperamentos</option>
-                <option>genio</option>
-                <option>agil</option>
-            </select>
+            <input type="text" className={style.input} name='temperaments' placeholder={Errors.temperaments} onChange={handlerChange} />
+            <input type="url" className={style.input} name='imagen' placeholder={Errors.image} onChange={handlerChange} />
             <button type='submit' className={style.btn}>Crear</button>
         </div>
     </form>
