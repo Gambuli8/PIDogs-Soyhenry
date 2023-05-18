@@ -2,13 +2,12 @@ import React from 'react';
 import style from './Card.module.css';
 import { Link } from 'react-router-dom';
 
-function Card({name, image, temperaments, weight, email, phone}) {
+function Card({name, image, temperaments, weight, height, life_span, id}) {
   return (
     <div className={style.card_container}>
       <div className={style.card_detail}>
-        <p className={style.title}>{name}</p>
-            <p className={style.info}>{email}</p>
-            <p className={style.info}>{phone}</p>
+        <img src={image} alt={name} className={style.img} />
+        <h3 className={style.info}>Raza: {name}</h3>
       </div>
       <Link to={`/detalle/${name}`}> <button className={style.button}>Mas info</button></Link>
     </div>

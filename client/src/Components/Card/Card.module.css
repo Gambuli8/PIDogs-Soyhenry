@@ -4,7 +4,7 @@
     border-radius: 20px;
     background: #f5f5f5;
     position: relative;
-    padding: 1.8rem;
+    padding: 1rem;
     border: 2px solid #c3c6ce;
     transition: 0.5s ease-out;
     overflow: visible;
@@ -21,9 +21,9 @@
 }
 
 .card_detail{
-    display: grid;
-    gap: .5em;
-    place-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
     color: black;
 }
@@ -45,10 +45,22 @@
 }
 
 .info{
-    color: rgb(134, 134, 134);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #FFA600;
 }
 
 .title{
     font-size: 1.5em;
  font-weight: bold;
+}
+
+.img{
+    width: 230px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
 }

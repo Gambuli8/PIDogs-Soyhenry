@@ -1,11 +1,12 @@
 import React from 'react';
 import style from './Create.module.css';
-import { PostDogs } from '../../Redux/Actions/Actions';
+import { GetNewDogs } from '../../Redux/Actions/Actions';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 function Create() {
 
+  //! ESTADOS
   const [state, setState] = useState({
     name: '',
     weight: '',
@@ -15,9 +16,10 @@ function Create() {
     temperaments: [],
   });
 
+  //! HOOKS
   const dispatch = useDispatch();
   
-
+  //! FUNCIONES
   // esta funcion se encarga de capturar los datos que se ingresan en los inputs
   const handlerChange = (e) => {
     setState({
@@ -30,6 +32,12 @@ function Create() {
     }, e.target.name);
   };
 
+  // esta funcion se encarga de enviar los datos al back
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    dispatch(GetNewDogs(state));
+  };
+
   // esta funcion se encarga de validar los datos que se ingresan en los inputs
   const [Errors, setErrors] = useState({
     name: 'Raza ',
@@ -40,7 +48,7 @@ function Create() {
     temperaments: 'Temperamentos ',
   });
 
-
+  //! VALIDACIONES
   const validate = (input, name) => {
     if(name === 'name') {
       if (input === '') {
@@ -101,6 +109,21 @@ function Create() {
       return;
     };
 
+    if(name === 'image') {
+      if (input === '') {
+        setErrors({
+        ...Errors,
+          [name]: 'url de la Imagen requerida',
+        });
+      } else {
+        setErrors({
+        ...Errors,
+          [name]: '',
+        });
+      };
+      return;
+    };
+
     if(name === 'temperaments') {
       if (input === '') {
         setErrors({
@@ -115,14 +138,9 @@ function Create() {
       };
       return;
     }
-
+    
   };
-
-  // esta funcion se encarga de enviar los datos al back
-  const handlerSubmit = (e) => {
-    e.preventDefault();
-    dispatch(PostDogs(state));
-  };
+  
   return (
     <div className={style.container}>
       <div className={style.card}>
@@ -135,7 +153,7 @@ function Create() {
             <input type="text" className={style.input} name='life_span' placeholder={Errors.life_span} onChange={handlerChange} />
             <input type="text" className={style.input} name='height' placeholder={Errors.height} onChange={handlerChange} />
             <input type="text" className={style.input} name='temperaments' placeholder={Errors.temperaments} onChange={handlerChange} />
-            <input type="url" className={style.input} name='imagen' placeholder={Errors.image} onChange={handlerChange} />
+            <input type="url" className={style.input} name='image' placeholder={Errors.image} onChange={handlerChange} />
             <button type='submit' className={style.btn}>Crear</button>
         </div>
     </form>

@@ -89,7 +89,7 @@ const getTemperament = async () => {
         }
     });
     const temperamentDB = await Temperament.findAll();
-    return temperamentDB;
+    return [...temperamentApi.data, ...temperamentDB];
 };
 
 module.exports = {
