@@ -1,4 +1,11 @@
 .cards_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.Cards{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -6,4 +13,13 @@
     align-items: center;
     gap: 3rem;
     margin: 100px;
+}
+
+.Paginado{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
 }

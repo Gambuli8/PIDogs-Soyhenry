@@ -3,7 +3,7 @@ import style from './Detail.module.css';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-function Detail(props) {
+function Detail() {
 
   const allDogs = useSelector((state) => state.allDogs);
   const [dog, setDog] = useState({});
@@ -16,7 +16,9 @@ function Detail(props) {
 
   
   return (
-    <div className={style.container}>
+    <div>
+      {dog.name ? (
+        <div className={style.container}>
       <div className={style.Card}>
         <div className={style.container_info}>
           <h1 className={style.title}>{dog.name}</h1>
@@ -29,6 +31,10 @@ function Detail(props) {
           <img className={style.image} src={dog.image} alt='imagen no disponible' />
         </div>
       </div>
+    </div>
+      ) : (
+        <h3 className={style.loading}>Loading</h3>
+      )}
     </div>
   )
 }

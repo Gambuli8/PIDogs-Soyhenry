@@ -1,6 +1,6 @@
 .container{
     background-color: #F7CE68;
-    background-image: linear-gradient(0deg, #F7CE68 0%, #ebd434 58%, #ffffff 85%);
+    background-image: linear-gradient(0deg, #F7CE68 0%, #efa91d 58%, #ffffff 85%);
     height: 88.5vh;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@
     width: 900px;
     height: 420px;
     border-radius: 30px;
-    background: #c58d00;
+    background: rgb(72, 71, 71);
     box-shadow: 15px 15px 30px rgb(25, 25, 25),
      -15px -15px 30px rgb(60, 60, 60);
 }
@@ -32,7 +32,7 @@
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
-    color: #fff;
+    color: orange;
     text-shadow: 3px 3px 3px #000;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -42,6 +42,7 @@
 .info{
     display: flex;
     justify-content: space-between;
+    color: white;
     align-items: center;
     padding: 0 2rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -56,7 +57,7 @@
     width: 100%;
     height: 100%;
     padding: 2rem;
-    border-right: 1px solid #fff;
+    border-right: 1px solid #F7CE68;
 }
 
 .container_image{
@@ -73,4 +74,30 @@
     border-radius: 20%;
     box-shadow: 10px 10px 20px rgb(25, 25, 25),
      -10px -10px 20px rgb(60, 60, 60);
+}
+
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 50px;
+    font-weight: bold;
+    color: #F7CE68;
+
+    animation: loading 1s infinite;
+
+}
+
+@keyframes loading{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }
