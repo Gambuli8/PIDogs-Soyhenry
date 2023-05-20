@@ -7,7 +7,7 @@ function Card({name, image, temperaments, weight, height, life_span, id}) {
     <div className={style.card_container}>
       <div className={style.card_detail}>
         <img src={image} alt={name} className={style.img} />
-        <h3 className={style.info}>Raza: {name}</h3>
+        <h3 className={style.info}>{name}</h3>
       </div>
       <Link to={`/detalle/${name}`}> <button className={style.button}>Mas info</button></Link>
     </div>
