@@ -14,6 +14,10 @@ let inicialState = {
 
 function rootReducer (state = inicialState, action){
     switch(action.type){
+        default:
+            return {
+                ...state
+            } 
         case GET_ALL_DOGS:
             return {
                 ...state,
@@ -51,10 +55,6 @@ function rootReducer (state = inicialState, action){
                     }),
                     filtered: true
                 }
-            }
-        default:
-            return {
-                ...state
             }
         };
     

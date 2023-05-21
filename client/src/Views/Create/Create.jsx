@@ -143,20 +143,45 @@ function Create() {
   
   return (
     <div className={style.container}>
-      <div className={style.card}>
-    <form className={style.form} onSubmit={handlerSubmit}>
-      {console.log(Errors)}
-        <div className={style.form_front}>
-            <div className={style.form_details}>Crear nuevo Perro</div>
-            <input type="text" className={style.input} name='name' placeholder={Errors.name} onChange={handlerChange} />
-            <input type="text" className={style.input} name='weight' placeholder={Errors.weight} onChange={handlerChange} />
-            <input type="text" className={style.input} name='life_span' placeholder={Errors.life_span} onChange={handlerChange} />
-            <input type="text" className={style.input} name='height' placeholder={Errors.height} onChange={handlerChange} />
-            <input type="text" className={style.input} name='temperaments' placeholder={Errors.temperaments} onChange={handlerChange} />
-            <input type="url" className={style.input} name='image' placeholder={Errors.image} onChange={handlerChange} />
-            <button type='submit' className={style.btn}>Crear</button>
-        </div>
-    </form>
+      <div className={style.Card}>
+      <h1 className={style.title}>Crear Perro</h1>
+        <form className={style.form} onSubmit={handlerSubmit}>
+          <div className={style.form_details}>
+            <input type="text" className={style.input} placeholder={Errors.name} name='name' onChange={handlerChange} />
+            <label>Raza</label>
+            </div>
+
+            <div className={style.form_details}>
+            <input type="text" className={style.input} placeholder={Errors.weight} name='weight' onChange={handlerChange} />
+            <label>Peso</label>
+            </div>
+
+            <div className={style.form_details}>
+            <input type="text" className={style.input} placeholder={Errors.height} name='height' onChange={handlerChange} />
+            <label>Altura</label>
+            </div>
+
+            <div className={style.form_details}>
+            <input type="text" className={style.input} placeholder={Errors.life_span} name='life_span' onChange={handlerChange} />
+            <label>Años de vida</label>
+            </div>
+
+            <div className={style.form_details}>
+            <input type="text" className={style.input} placeholder={Errors.temperaments} name='temperaments' onChange={handlerChange} />
+            <label>Temperamentos</label>
+            </div>
+            <div className={style.form_details}>
+            <input type="url" className={style.input} placeholder={Errors.image} name='image' onChange={handlerChange} />
+            <label>Url de la imagen</label>
+            </div>
+            <button type='submit' className={style.btn}>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Crear
+              </button>
+        </form>
       </div>
     </div>
   )

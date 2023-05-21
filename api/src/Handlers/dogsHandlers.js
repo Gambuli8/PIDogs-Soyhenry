@@ -28,7 +28,7 @@ const postDogHandler = async (req, res) => {
         const newDog = await newDogDB(image, name, height, weight, life_span, temperament);
         res.status(200).json(newDog);
     } catch (error) {
-        res.status(404).send('No se pudo crear el perro');
+        res.status(404).json(error.message)
     }
 };
 

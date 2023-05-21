@@ -36,8 +36,18 @@ function Searchbar({paginado}) {
 
   return (
     <div className={style.container}>
-        <input onChange={handlerChange} type="text" placeholder="Search..." value={name} />
-        <button onClick={handlerSubmit} type="submit">Search</button>
+    <div className={style.input_group}>
+        <input onChange={handlerChange} type="text" name='text' className={style.input} autoComplete='off' value={name} />
+        <label className={style.user_label}>Buscar</label>
+    </div>
+        <button onClick={handlerSubmit} type="submit" className={style.button}>
+          <span className={style.circle1}></span>
+          <span className={style.circle2}></span>
+          <span className={style.circle3}></span>
+          <span className={style.circle4}></span>
+          <span className={style.circle5}></span>
+          <span className={style.text}>Buscar</span>
+          </button>
     </div>
   )
 }

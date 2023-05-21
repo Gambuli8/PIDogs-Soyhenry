@@ -38,7 +38,7 @@ const getDogsDB = async (name) => {
 
 const getAllDogs = async () => {
     const allDog = await Dog.findAll();
-        const dogApi = await axios.get(`https://api.thedogapi.com/v1/breeds/`);
+        const dogApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
         const dogApiFilter = dogApi.data.map(dog => {
             return {
                 id: dog.id,
@@ -65,7 +65,7 @@ const getDogsDBId = async (id) => {
 
 const newDogDB = async (image, name, height, weight, life_span, temperament) => {
     const newDog = await Dog.create({ image, name, height, weight, life_span, temperament });
-    let temperamentDB = await Temperament.findAll({
+    const temperamentDB = await Temperament.findAll({
         where: {
             name: temperament,
         },
@@ -75,21 +75,16 @@ const newDogDB = async (image, name, height, weight, life_span, temperament) => 
 };
 
 const getTemperament = async () => {
-    const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
-    temperamentApi.data.forEach(async (dog) => {
-        if(dog.temperament){
-            let temps = dog.temperament.split(', ');
-            temps.forEach(async (temp) => {
-                await Temperament.findOrCreate({
-                    where: {
-                        name: temp,
-                    },
-                });
-            });
-        }
-    });
     const temperamentDB = await Temperament.findAll();
-    return [...temperamentApi.data, ...temperamentDB];
+    const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
+    const temperamentApiFilter = temperamentApi.data.map(dog => {
+        return dog.temperament ? dog.temperament.split(', ') : [];
+    });
+    const response = [...temperamentDB, ...temperamentApiFilter];
+    const responseFilter = response.filter(tempe => tempe != null)
+    const responseFilter2 = responseFilter.flat().sort( (a, b) => a.localeCompare(b) );
+    const setResponse = new Set(responseFilter2);
+    return [...setResponse];
 };
 
 module.exports = {

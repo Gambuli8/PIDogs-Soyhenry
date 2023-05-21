@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      { pathname === '/' ||  <NavBar />}
+      { (pathname != '/' && pathname != "/crear" && pathname !== "/detalle/:name") &&  <NavBar />}
       <Routes>  
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />

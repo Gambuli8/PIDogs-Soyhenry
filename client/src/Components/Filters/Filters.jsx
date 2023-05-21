@@ -43,7 +43,7 @@ export default function Filters() {
   return (
     <div className={style.container}>
         <select onChange={filter} name="ordenamiento" id="Order">
-            <option defaultChecked value="0">Ordenar</option>
+            <option defaultChecked value={null}>Ordenar</option>
             <option value="asc">Ascendente</option>
             <option value="desc">Descendente</option>
         </select>

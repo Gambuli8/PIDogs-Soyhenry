@@ -20,20 +20,21 @@ function Home() {
 
     useEffect(() => {
       dispatch(GetAllDogs());
-    },[]);
+    },[ dispatch]);
 
     useEffect(() => {
       setDogs(allDogs);
     },[allDogs]);
 
-
+    
   return (
     <div>
     {dogs.length ? (
       <div className={style.container}>
         {/* <Paginado currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage} /> */}
       <Filters />
-      {Filters?<Cards allDogs={dogsFilter}/>:<Cards allDogs={dogs} />}
+      <Cards allDogs={dogs}/>
+      {/* {Filters? <Cards allDogs={dogsFilter}/> : <Cards allDogs={dogs}/>} */}
       </div>
       ) : (
         <h3 className={style.loading}>Loading...</h3>
