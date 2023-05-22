@@ -33,7 +33,7 @@ export const GetAllTemperaments = () => {
 export const GetNewDogs = (info) => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`http://localhost:3001/dogs/`, info);
+            const response = await axios.post(`http://localhost:3001/dogs/`, info);
             dispatch({ type: GET_NEW_DOGS, payload: response.data });
             alert('Dog created successfully!');
         } catch (error) {

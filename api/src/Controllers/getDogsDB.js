@@ -5,16 +5,9 @@ const { API_KEY } = process.env;
 const getDogsDB = async (name) => {
     if (name) {
 
-        const dogDB = await Dog.findAll({
+        const dogDB = await Dog.findOne({
             where: {
                 name: name
-            },
-            include: {
-                model: Temperament,
-                attributes: ['name'],
-                through: {
-                    attributes: [],
-                },
             },
         });
         

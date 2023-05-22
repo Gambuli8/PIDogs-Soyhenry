@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import style from './home.module.css';
 import Cards from '../../Components/Cards/Cards';
+import NavBar from '../../Components/NavBar/NavBar';
 import { useSelector, useDispatch } from 'react-redux';
 import { GetAllDogs } from '../../Redux/Actions/Actions';
 import Filters from '../../Components/Filters/Filters';
@@ -20,7 +21,7 @@ function Home() {
 
     useEffect(() => {
       dispatch(GetAllDogs());
-    },[ dispatch]);
+    },[]);
 
     useEffect(() => {
       setDogs(allDogs);
@@ -32,6 +33,7 @@ function Home() {
     {dogs.length ? (
       <div className={style.container}>
         {/* <Paginado currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage} /> */}
+      <NavBar />
       <Filters />
       <Cards allDogs={dogs}/>
       {/* {Filters? <Cards allDogs={dogsFilter}/> : <Cards allDogs={dogs}/>} */}

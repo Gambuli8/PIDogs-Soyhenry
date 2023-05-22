@@ -5,7 +5,7 @@
 }
 
 .navbar{
-    height: 4rem;
+    height: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,6 @@
 }
 
 .navbar_links{
-    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;

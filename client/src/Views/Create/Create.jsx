@@ -24,11 +24,11 @@ function Create() {
   const handlerChange = (e) => {
     setState({
       ...state,
-      [e.target.name]: e.target.value,
+      [e.target?.name]: e.target?.value,
     });
     validate({
       ...state,
-      [e.target.name]: e.target.value,
+      [e.target?.name]: e.target?.value,
     }, e.target.name);
   };
 

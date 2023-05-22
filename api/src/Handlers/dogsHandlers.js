@@ -1,6 +1,7 @@
 const e = require('express');
 const { getAllDogs ,getDogsDB, getDogsDBId, newDogDB } = require('../Controllers/getDogsDB.js');
 
+//query --> /dogs?name=perro
 const getDogByNameHandler = async (req, res) => {
     const { name } = req.query;
     try {
