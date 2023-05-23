@@ -6,27 +6,34 @@ import { useState } from 'react';
 
 function Cards({allDogs}) {
 
+
+  //! PAGINADO
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage, setDogsPerPage] = useState(8);
-  const maxPage =  Math.ceil(allDogs.length / dogsPerPage);
+  const indexOfLastDog = currentPage * dogsPerPage;
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className={style.cards_container}>
       <div className={style.Paginado}>
-      <Paginado currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage} />
+      <Paginado dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate}/>
       </div>
       <div className={style.Cards}>
-      {allDogs.slice(
-        (currentPage - 1) * dogsPerPage,
-        (currentPage - 1) * dogsPerPage + dogsPerPage
-        ).map((dog) => (
+      {currentDogs.map((dog) => (
           <Card
           key={dog.id}
           id={dog.id}
           name={dog.name}
           life_span={dog.life_span}
-          weight={dog.weight.imperial}
-          height={dog.height.imperial}
+          weight_min={dog?.weight_min}
+          weight_max={dog?.weight_max}
+          height_min={dog?.height_min}
+          height_max={dog?.height_max}
           image={dog.image}
           temperaments={dog.temperaments}
           />

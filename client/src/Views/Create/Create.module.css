@@ -13,8 +13,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 630px;
-  width: 450px;
+  height: 530px;
+  width: 650px;
   padding: 40px;
   margin: 20px auto;
   transform: translate(-50%, -55%);
@@ -34,8 +34,15 @@
   letter-spacing: 1px;
 }
 
+.form{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
 .Card .form_details{
   position: relative;
+  padding: 5px;
 }
 
 .Card .form_details input{

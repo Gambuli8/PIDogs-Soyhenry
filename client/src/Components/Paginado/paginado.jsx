@@ -2,27 +2,24 @@ import React, {useState} from 'react';
 import style from './paginado.module.css';
 
 
- function Paginado ({currentPage, setCurrentPage, maxPage}) {
+ function Paginado ({allDogs, dogsPerPage, paginate}) {
 
-    const [inputt, setInputt] = useState (1);
+    const pageNumbers = [];
 
-    const nextPage = () => {
-        setInputt(inputt + 1);
-        setCurrentPage(currentPage + 1);
-    };
-
-    const beforepage = () => {
-        setInputt(inputt - 1);
-        setCurrentPage(currentPage - 1);
-    };
+    for (let i = 1; i <= Math.ceil(allDogs / dogsPerPage); i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <div className={style.container}>
-            <button onClick={beforepage} disabled={currentPage === maxPage } >Anterior</button>
-            <input name='page' autoComplete='off' value={inputt} />
-            <p>De {maxPage}</p>
-            <button onClick={nextPage} disabled={currentPage === maxPage} >Siguiente</button>
-
+            <ul className={style.ul}>
+                {pageNumbers &&
+                    pageNumbers.map(number => (
+                        <li key={number} className={style.li}>
+                        <a onClick={() => paginate(number)}>{number}</a>
+                        </li>
+                    ))}
+            </ul>
         </div>
     )
    

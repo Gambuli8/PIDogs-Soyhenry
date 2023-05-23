@@ -16,8 +16,9 @@ const getDogsDB = async (name) => {
             return {
                 id: dog.id,
                 name: dog.name.toLowerCase().includes(name.toLowerCase()) ? dog.name : null,
-                height: dog.height,
-                weight: dog.weight,
+                weight_min: dog.weight_min,
+                weight_max: dog.weight_max,
+                height: `${dog.height_min} - ${dog.height_max}`,
                 life_span: dog.life_span,
                 temperament: dog.temperament  ? dog.temperament.split(', ') : [],
                 image: dog.image,
@@ -36,9 +37,12 @@ const getAllDogs = async () => {
             return {
                 id: dog.id,
                 name: dog.name,
-                height: dog.height,
-                weight: dog.weight,
+                weight_min: parseInt(dog.weight.imperial.split(' - ')[0]),
+                weight_max: parseInt(dog.weight.imperial.split(' - ')[1]),
+                height_min: parseInt(dog.height.imperial.split(' - ')[0]),
+                height_max: parseInt(dog.height.imperial.split(' - ')[1]),
                 life_span: dog.life_span,
+                createdInDb: dog.createdInDb,
                 temperament: dog.temperament  ? dog.temperament.split(', ') : [],
                 image: dog.image.url,
             };
@@ -56,8 +60,8 @@ const getDogsDBId = async (id) => {
         return dogApi.data;
 }
 
-const newDogDB = async (image, name, height, weight, life_span, temperament) => {
-    const newDog = await Dog.create({ image, name, height, weight, life_span, temperament });
+const newDogDB = async (image, name, height_min, height_max, weight_min, weight_max, life_span, temperament) => {
+    const newDog = await Dog.create({ image, name, height_min, height_max, weight_min, weight_max, life_span, temperament });
     const temperamentDB = await Temperament.findAll({
         where: {
             name: temperament,
@@ -67,7 +71,7 @@ const newDogDB = async (image, name, height, weight, life_span, temperament) => 
     return newDog;
 };
 
-const getTemperament = async () => {
+const getTemperaments = async () => {
     const temperamentDB = await Temperament.findAll();
     const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
     const temperamentApiFilter = temperamentApi.data.map(dog => {
@@ -85,5 +89,5 @@ module.exports = {
     getDogsDB,
     getDogsDBId,
     newDogDB,
-    getTemperament,
+    getTemperaments,
 };

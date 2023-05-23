@@ -24,9 +24,9 @@ const getDogAllHandler = async (req, res) => {
 };
 
 const postDogHandler = async (req, res) => {
-    const {image, name, height, weight, life_span, temperament } = req.body;
+    const {image, name, height_min, height_max, weight_min, weight_max, life_span, temperament } = req.body;
     try {
-        const newDog = await newDogDB(image, name, height, weight, life_span, temperament);
+        const newDog = await newDogDB(image, name, height_min, height_max, weight_min, weight_max, life_span, temperament);
         res.status(200).json(newDog);
     } catch (error) {
         res.status(404).json(error.message)

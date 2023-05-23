@@ -1,61 +1,54 @@
-    import React, { useEffect, useState } from 'react';
-    import { useDispatch, useSelector } from 'react-redux';
+    import React from 'react';
     import style from './Filters.module.css';
-    import Paginate from '../Paginado/paginado';
-    import { GetAllDogs, GetAllTemperaments, GetDogsByName, GetFilters, GetFilterByTemperament,  } from '../../Redux/Actions/Actions';
-
+    import { useSelector, useDispatch } from 'react-redux';
+    import { GetFilters, GetFilterByWeight, GetFilterCreatedDog, GetFilterByTemperament } from '../../Redux/Actions/Actions';
 
 export default function Filters() {
+    const allTemperaments = useSelector((state) => state.allTemperaments);
+    const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
-    const allDogs = useSelector((state) => state.allDogs)
-    const allTemperaments = useSelector((state) => state.allTemperaments)
-
-    const [currentPage, setCurrentPage] = useState(1)
-    // const [dogsPerPage, setDogPerPage] = useState(8)
-    // const [orden, setOrden] = useState('')
-    // const indexLastDog = currentPage * dogsPerPage
-    // const indexFirstDog = indexLastDog - dogsPerPage
-    // const currentDogs = allDogs.slice(indexFirstDog, indexLastDog)
-    
-    // const paginado = (pageNumber) => {
-    //     setCurrentPage(pageNumber)
-    // }
-    
-    // function handlerFilterName (e) {
-        //     dispatch(GetDogsByName(e.target.value))
-        //     setCurrentPage(1)
-        //     setOrden(`Ordenado ${e.target.value}`)
-        // }
-        // <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs} paginado={paginado}/>
-
-
-        function handlerFilterTemperament (e) {
-            e.preventDefault();
-            dispatch(GetFilterByTemperament(e.target.value))
-            setCurrentPage(1)
-        }
-        
-
-    const filter = (event) => {
-        dispatch(GetFilters(event.target.value));
+    const handlerFilter = (e) => {
+        dispatch(GetFilters(e.target.value));
     };
+
+    const handlerFilterPeso = (e) => {
+        dispatch(GetFilterByWeight(e.target.value));
+    };
+
+    const handlersFilterCreated = (e) => {
+        dispatch(GetFilterCreatedDog(e.target.value));
+    };
+
+    const handlerFilterTemperament = (e) => {
+        dispatch(GetFilterByTemperament(e.target.value));
+    };
+
+
   return (
     <div className={style.container}>
-        <select onChange={filter} name="ordenamiento" id="Order">
-            <option defaultChecked value={null}>Ordenar</option>
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
+        <select onChange={e => handlerFilter(e)} name="ordenamiento" id="Order">
+            <option disabled selected defaultChecked>Alfabeticamente</option>
+            <option key={1} value="A-Z">A-Z</option>
+            <option key={2} value="Z-A">Z-A</option>
         </select>
-         <select onChange={e => handlerFilterTemperament(e)}>
-            <option disabled selected defaultValue>Temperaments</option>
-            <option key={1+'e'} value='All'>All</option>
-            {
-                allTemperaments.map(temp => (
-                    <option value={temp.name} key={temp.id}>{temp.name}</option>
-                ))
-            }
-            </select>
+        <select onChange={e => handlerFilterPeso(e)} name="ordenamiento_peso" id="peso">
+            <option disabled selected defaultChecked>Order by weight</option>
+            <option key={1} value="max">Maximo</option>
+            <option key={2} value="min">Minimo</option>
+        </select>
+        <select onChange={e => handlersFilterCreated(e)} name="ordenamiento_dogs" id="Created">
+            <option disabled selected defaultChecked>Order by create</option>
+            <option key={1} value="all">Todos</option>
+            <option key={2} value="created">Creados</option>
+            <option key={3} value="api">Existentes</option>
+        </select>
+        <select onChange={e => handlerFilterTemperament(e)} name="temperamentos" id="Temperaments">
+            <option disabled selected defaultChecked >Temperaments</option>
+            <option key={1} value='All'>All</option>
+                 {allTemperaments.map((t) => (
+                     <option key={t.id} value={t.name}>{t.name}</option>
+                     ))}
+        </select>
     </div>
   )
 };

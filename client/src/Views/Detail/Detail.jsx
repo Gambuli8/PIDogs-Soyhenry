@@ -31,8 +31,10 @@ function Detail() {
       <div className={style.Card}>
         <div className={style.container_info}>
           <h1 className={style.title}>{dog?.name}</h1>
-          <h3 className={style.info}>Altura: {dog.height.metric} cm</h3>
-          <h3 className={style.info}>Peso: {dog.weight.metric} kg</h3>
+          <h3 className={style.info}>Altura min: {dog?.height_min}Cm</h3>
+          <h3 className={style.info}>Altura max: {dog?.height_max}Cm</h3>
+          <h3 className={style.info}>Peso min: {dog?.weight_min}Kg</h3>
+          <h3 className={style.info}>Peso max: {dog?.weight_max}Kg</h3>
           <h3 className={style.info}>Años de vida: {dog?.life_span}</h3>
           <h3 className={style.info}>Temperamentos: {dog?.temperament?.join(', ')}</h3>
         </div>

@@ -24,17 +24,30 @@ module.exports = (sequelize) => {
       },
       allowNull: false,
     },
-    height: {
-      type: DataTypes.TEXT,
+    height_min: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    weight: {
-      type: DataTypes.TEXT,
+    height_max: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    weight_min: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    weight_max: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     life_span: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
   },{timestamps: false});
 };

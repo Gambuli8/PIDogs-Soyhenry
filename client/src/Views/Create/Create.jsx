@@ -9,8 +9,10 @@ function Create() {
   //! ESTADOS
   const [state, setState] = useState({
     name: '',
-    weight: '',
-    height: '',
+    weight_min: '',
+    weight_max: '',
+    height_min: '',
+    height_max: '',
     life_span: '',
     image: '',
     temperaments: [],
@@ -24,11 +26,11 @@ function Create() {
   const handlerChange = (e) => {
     setState({
       ...state,
-      [e.target?.name]: e.target?.value,
+      [e.target.name]: e.target.value,
     });
     validate({
       ...state,
-      [e.target?.name]: e.target?.value,
+      [e.target.name]: e.target.value,
     }, e.target.name);
   };
 
@@ -41,8 +43,10 @@ function Create() {
   // esta funcion se encarga de validar los datos que se ingresan en los inputs
   const [Errors, setErrors] = useState({
     name: 'Raza ',
-    weight: 'Peso ',
-    height: 'Altura ',
+    weight_min: 'Peso minimo ',
+    weight_max: 'Peso maximo',
+    height_min: 'Altura minima ',
+    height_max: 'Altura maxima',
     life_span: 'Años de vida ',
     image: ' url de la Imagen ',
     temperaments: 'Temperamentos ',
@@ -64,11 +68,11 @@ function Create() {
       };
       return;
     };
-    if(name === 'weight') {
+    if(name === 'weight_min') {
       if (input === '') {
         setErrors({
         ...Errors,
-          [name]: 'Peso requerido',
+          [name]: 'Peso minimo requerido',
         });
       } else {
         setErrors({
@@ -79,11 +83,41 @@ function Create() {
       return;
     };
 
-    if(name === 'height') {
+    if(name === 'weight_max') {
       if (input === '') {
         setErrors({
         ...Errors,
-          [name]: 'Altura requerida',
+          [name]: 'Peso maximo requerido',
+        });
+      } else {
+        setErrors({
+        ...Errors,
+          [name]: '',
+        });
+      };
+      return;
+    };
+
+    if(name === 'height_min') {
+      if (input === '') {
+        setErrors({
+        ...Errors,
+          [name]: 'Altura minima requerida',
+        });
+      } else {
+        setErrors({
+        ...Errors,
+          [name]: '',
+        });
+      };
+      return;
+    };
+
+    if(name === 'height_max') {
+      if (input === '') {
+        setErrors({
+        ...Errors,
+          [name]: 'Altura maxima requerida',
         });
       } else {
         setErrors({
@@ -152,13 +186,23 @@ function Create() {
             </div>
 
             <div className={style.form_details}>
-            <input type="text" className={style.input} placeholder={Errors.weight} name='weight' onChange={handlerChange} />
-            <label>Peso</label>
+            <input type="text" className={style.input} placeholder={Errors.weight_min} name='weight_min' onChange={handlerChange} />
+            <label>Peso minimo</label>
             </div>
 
             <div className={style.form_details}>
-            <input type="text" className={style.input} placeholder={Errors.height} name='height' onChange={handlerChange} />
-            <label>Altura</label>
+            <input type="text" className={style.input} placeholder={Errors.weight_max} name='weight_max' onChange={handlerChange} />
+            <label>Peso maximo</label>
+            </div>
+
+            <div className={style.form_details}>
+            <input type="text" className={style.input} placeholder={Errors.height_min} name='height_min' onChange={handlerChange} />
+            <label>Altura minima</label>
+            </div>
+
+            <div className={style.form_details}>
+            <input type="text" className={style.input} placeholder={Errors.height_max} name='height_max' onChange={handlerChange} />
+            <label>Altura maxima</label>
             </div>
 
             <div className={style.form_details}>
