@@ -81,7 +81,7 @@ function rootReducer (state = inicialState, action){
           dogsFilter: action.payload === 'all' ? state.allDogs : filterCreated
         };
         case GET_FILTER_BY_TEMPERAMENT:
-            const allDogs2 = state.allDogs
+            const allDogs2 = state.allDogs;
         const filteredTemp = action.payload === 'All'?  allDogs2 : allDogs2.filter(e => {
             return e.temperament?.includes(action.payload)
         })

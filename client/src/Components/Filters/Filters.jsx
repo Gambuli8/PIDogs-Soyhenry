@@ -1,10 +1,13 @@
     import React from 'react';
     import style from './Filters.module.css';
     import { useSelector, useDispatch } from 'react-redux';
-    import { GetFilters, GetFilterByWeight, GetFilterCreatedDog, GetFilterByTemperament } from '../../Redux/Actions/Actions';
+    import { GetFilters, GetFilterByWeight, GetFilterCreatedDog, GetFilterByTemperament, GetAllTemperaments } from '../../Redux/Actions/Actions';
 
-export default function Filters() {
-    const allTemperaments = useSelector((state) => state.allTemperaments);
+export default function Filters() { 
+    const allDogs = useSelector((state) => state.allDogs);
+    const allDogs2 = allDogs.map((d) => d.temperament);
+    const allDogs3 = new Set(allDogs2.flat());
+    const allDogs4 = [...allDogs3];
     const dispatch = useDispatch();
 
     const handlerFilter = (e) => {
@@ -44,10 +47,9 @@ export default function Filters() {
         </select>
         <select className={style.select} onChange={e => handlerFilterTemperament(e)} name="temperamentos">
             <option defaultChecked defaultValue='0' >Temperaments</option>
-            <option className={style.opciones} key={1} value='All'>All</option>
-                 {allTemperaments.map((t) => (
-                     <option className={style.opciones} key={t.id} value={t.name}>{t.name}</option>
-                     ))}
+            {allDogs4.map((t) => (
+                <option className={style.opciones} key={t} value={t}>{t}</option>
+            ))}
         </select>
     </div>
   )

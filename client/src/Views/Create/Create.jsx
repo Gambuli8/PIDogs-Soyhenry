@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 
 function Create() {
 
+  //! HOOKS
+  const dispatch = useDispatch();
+  
   //! ESTADOS
   const [state, setState] = useState({
     name: '',
@@ -16,11 +19,8 @@ function Create() {
     height_max: '',
     life_span: '',
     image: '',
-    temperaments: [],
+    temperaments: '',
   });
-
-  //! HOOKS
-  const dispatch = useDispatch();
   
   //! FUNCIONES
   // esta funcion se encarga de capturar los datos que se ingresan en los inputs
@@ -223,6 +223,7 @@ function Create() {
             <input type="text" className={style.input} placeholder={Errors.temperaments} name='temperaments' onChange={handlerChange} />
             <label>Temperamentos</label>
             </div>
+            
             <div className={style.form_details}>
             <input type="url" className={style.input} placeholder={Errors.image} name='image' onChange={handlerChange} />
             <label>Url de la imagen</label>

@@ -12,13 +12,17 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate : {
-        isAlpha: true,
-        len: [3, 20],
+        len: {
+          args: [3, 20],
+          msg: 'el nombre debe tener entre 3 y 20 caracteres'
+        }
       }
     },
     image: {
       type: DataTypes.STRING,
+      unique: true,
       validate : {
         isUrl: true,
       },

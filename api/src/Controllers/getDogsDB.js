@@ -17,7 +17,7 @@ const getDogsDB = async (name) => {
             },
         });
         const dogApi = await axios.get(`https://api.thedogapi.com/v1/breeds/search?name=${name}&api_key=${API_KEY}`);
-        const dogApiFilter = dogApi.data.map(dog => {
+        const dogApiFilter = await dogApi.data.map(dog => {
             return {
                 id: dog.id,
                 name: dog.name,
@@ -58,6 +58,7 @@ const getAllDogs = async () => {
 };
 
 const getDogsDBId = async (id) => {
+    // id de la base de datos son numeros y letras y el id de la api son solo numeros 
     if(isNaN(id)){
         const dogDB = await Dog.findByPk(id);
         return dogDB;
@@ -66,11 +67,11 @@ const getDogsDBId = async (id) => {
         return dogApi.data;
 }
 
-const newDogDB = async (image, name, height_min, height_max, weight_min, weight_max, life_span, temperament) => {
-    const newDog = await Dog.create({ image, name, height_min, height_max, weight_min, weight_max, life_span, temperament });
-    const temperamentDB = await Temperament.findAll({
+const newDogDB = async (image, name, height_min, height_max, weight_min, weight_max, life_span, temperaments) => {
+    let newDog = await Dog.create({ image, name, height_min, height_max, weight_min, weight_max, life_span });
+    let temperamentDB = await Temperament.findAll({
         where: {
-            name: temperament,
+            name: temperaments,
         },
     });
     await newDog.addTemperament(temperamentDB);
@@ -79,7 +80,7 @@ const newDogDB = async (image, name, height_min, height_max, weight_min, weight_
 
 const getTemperaments = async () => {
     const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
-    const temperamentApiFilter = temperamentApi.data.map(dog => {
+    const temperamentApiFilter = await temperamentApi.data.map(dog => {
         return dog.temperament ? dog.temperament.split(', ') : [] 
     });
     const response = [...temperamentApiFilter];
@@ -91,7 +92,9 @@ const getTemperaments = async () => {
             },
         });
     });
-    return [...responseFilter];
+    const temperamentDB = await Temperament.findAll();
+    const tempeMap = temperamentDB.map((tempe) => tempe.name)
+    return tempeMap;
 };
 
 module.exports = {

@@ -1,5 +1,5 @@
 const e = require('express');
-const { getAllDogs ,getDogsDB, getDogsDBId, newDogDB, getTemperaments } = require('../Controllers/getDogsDB.js');
+const { getAllDogs ,getDogsDB, getDogsDBId, newDogDB } = require('../Controllers/getDogsDB.js');
 
 //query --> /dogs?name=perro
 const getDogByNameHandler = async (req, res) => {
@@ -7,11 +7,10 @@ const getDogByNameHandler = async (req, res) => {
     try {
         if(name) {
             const allDogsName = await getDogsDB(name);
-            console.log(allDogsName);
             res.status(200).json(allDogsName);
         } 
     } catch (error) {
-        res.status(404).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 };
 
@@ -20,17 +19,17 @@ const getDogAllHandler = async (req, res) => {
         const allDogs = await getAllDogs();
         res.status(200).json(allDogs);
     } catch (error) {
-        res.status(404).json('No se encontraron perros');
+        res.status(400).json('No se encontraron perros');
     }
 };
 
 const postDogHandler = async (req, res) => {
     const {image, name, height_min, height_max, weight_min, weight_max, life_span, temperament } = req.body;
     try {
-        const newDog = await newDogDB(image, name, height_min, height_max, weight_min, weight_max, life_span, temperament);
+        let newDog = await newDogDB(image, name, height_min, height_max, weight_min, weight_max, life_span, temperament);
         res.status(200).json(newDog);
     } catch (error) {
-        res.status(404).json(error.message)
+        res.status(400).json(error.message)
     }
 };
 
@@ -40,7 +39,7 @@ const getDogByIdHandler = async (req, res) => {
         const dog = await getDogsDBId(id); 
         res.status(200).json(dog);
     } catch (error) {
-        res.status(404).json('No se encontró el perro');
+        res.status(400).json('No se encontró el perro');
     }
 };
 
