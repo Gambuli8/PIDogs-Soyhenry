@@ -3,6 +3,7 @@ import style from './Create.module.css';
 import { GetNewDogs } from '../../Redux/Actions/Actions';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function Create() {
 
@@ -177,6 +178,14 @@ function Create() {
   
   return (
     <div className={style.container}>
+    <Link to='/home'><button type="submit" className={style.button}>
+          <span className={style.span}></span>
+          <span className={style.span}></span>
+          <span className={style.span}></span>
+          <span className={style.span}></span>
+          <span className={style.span}></span>
+          <span className={style.text}>Back</span>
+          </button></Link>
       <div className={style.Card}>
       <h1 className={style.title}>Crear Perro</h1>
         <form className={style.form} onSubmit={handlerSubmit}>

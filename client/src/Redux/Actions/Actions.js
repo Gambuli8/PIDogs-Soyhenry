@@ -3,7 +3,6 @@ export const GET_ALL_DOGS = 'GET_ALL_DOGS';
 export const GET_ALL_TEMPERAMENTS = 'GET_ALL_TEMPERAMENTS';
 export const GET_NEW_DOGS = 'GET_NEW_DOGS';
 export const GET_DOGS_BY_NAME = 'GET_DOGS_BY_NAME';
-
 //!FILTERS
 export const GET_FILTERS = 'GET_FILTERS';
 export const GET_FILTER_BY_WEIGHT = 'GET_FILTER_BY_WEIGHT';
@@ -25,7 +24,7 @@ export const GetAllDogs = () => {
 export const GetAllTemperaments = () => {
     return async function (dispatch) {
         try {
-            const response = await axios.get('http://localhost:3001/temperaments/');
+            const response = await axios.get(`http://localhost:3001/temperaments/`);
             return dispatch({ type: GET_ALL_TEMPERAMENTS, payload: response.data });
         } catch (error) {
             alert(error.response.data);
@@ -49,10 +48,10 @@ export const GetDogsByName = (name) => {
     try {
         return async function (dispatch) {
             const response = await axios.get(`http://localhost:3001/dogs/search?name=${name}`);
-            return dispatch({ type: GET_DOGS_BY_NAME, payload: response.data });
+                dispatch({ type: GET_DOGS_BY_NAME, payload: response.data });
         };
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 };
 

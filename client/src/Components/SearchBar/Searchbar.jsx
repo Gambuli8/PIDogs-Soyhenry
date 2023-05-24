@@ -14,9 +14,9 @@ function Searchbar({paginado}) {
   // const allDogs = useSelector((state) => state.allDogs);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   dispatch(GetDogsByName(name));
-  // }, [dispatch, name]);
+  useEffect(() => {
+    dispatch(GetDogsByName(name));
+  }, [dispatch, name]);
 
   const handlerinputChange = (e) => {
     e.preventDefault();

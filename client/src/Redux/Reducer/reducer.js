@@ -20,6 +20,8 @@ let inicialState = {
 // dogsFilter es una copia de allDogs, que se va a modificar con los filtros
 // filtered es un booleano que indica si se aplicaron filtros o no
 
+console.log(inicialState.allTemperaments);
+
 function rootReducer (state = inicialState, action){
     switch(action.type){
         case GET_ALL_DOGS:
@@ -42,7 +44,6 @@ function rootReducer (state = inicialState, action){
             return {
                 ...state,
                 dogsFilter: action.payload,
-                filtered: true
             }
         case GET_FILTERS:
             const filterDogs = action.payload === "A-Z" ? state.allDogs.sort((a,b) => {
@@ -86,7 +87,7 @@ function rootReducer (state = inicialState, action){
         })
         return {
           ...state,
-          dogs: filteredTemp,
+          dogsFilter: filteredTemp,
       };
                         
         default:

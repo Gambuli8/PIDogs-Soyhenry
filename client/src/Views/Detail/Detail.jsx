@@ -36,7 +36,7 @@ function Detail() {
           <h3 className={style.info}>Peso min: {dog?.weight_min}Kg</h3>
           <h3 className={style.info}>Peso max: {dog?.weight_max}Kg</h3>
           <h3 className={style.info}>Años de vida: {dog?.life_span}</h3>
-          <h3 className={style.info}>Temperamentos: {dog?.temperament?.join(', ')}</h3>
+          <h3 className={style.info}>Temperamentos: {dog.temperament?.join(', ')}</h3>
         </div>
         <div className={style.container_image}>
           <img className={style.image} src={dog?.image} alt='imagen no disponible' />

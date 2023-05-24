@@ -4,28 +4,34 @@ const { API_KEY } = process.env;
 
 const getDogsDB = async (name) => {
     if (name) {
-
-        const dogDB = await Dog.findOne({
+        const dogDB = await Dog.findAll({
             where: {
-                name: name
+                name: name,
+            },
+            include: {
+                model: Temperament,
+                attributes: ['name'],
+                through: {
+                    attributes: [],
+                },
             },
         });
-        
-        const dogApi = await axios.get(`https://api.thedogapi.com/v1/breeds/search?name=${name}`);
+        const dogApi = await axios.get(`https://api.thedogapi.com/v1/breeds/search?name=${name}&api_key=${API_KEY}`);
         const dogApiFilter = dogApi.data.map(dog => {
             return {
                 id: dog.id,
-                name: dog.name.toLowerCase().includes(name.toLowerCase()) ? dog.name : null,
-                weight_min: dog.weight_min,
-                weight_max: dog.weight_max,
-                height: `${dog.height_min} - ${dog.height_max}`,
+                name: dog.name,
+                weight_min: parseInt(dog.weight.metric.split(' - ')[0]),
+                weight_max: parseInt(dog.weight.metric.split(' - ')[1]),
+                height_min: parseInt(dog.height.metric.split(' - ')[0]),
+                height_max: parseInt(dog.height.metric.split(' - ')[1]),
                 life_span: dog.life_span,
-                temperament: dog.temperament  ? dog.temperament.split(', ') : [],
-                image: dog.image,
+                createdInDb: dog.createdInDb,
+                temperament: dog.temperament ? dog.temperament.split(', ') : [],
+                image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
             };
         });
-        const response = [...dogDB, ...dogApiFilter];
-        
+        const response = [...dogDB,...dogApiFilter];
         return response;
     }
 };
@@ -37,10 +43,10 @@ const getAllDogs = async () => {
             return {
                 id: dog.id,
                 name: dog.name,
-                weight_min: parseInt(dog.weight.imperial.split(' - ')[0]),
-                weight_max: parseInt(dog.weight.imperial.split(' - ')[1]),
-                height_min: parseInt(dog.height.imperial.split(' - ')[0]),
-                height_max: parseInt(dog.height.imperial.split(' - ')[1]),
+                weight_min: parseInt(dog.weight.metric.split(' - ')[0]),
+                weight_max: parseInt(dog.weight.metric.split(' - ')[1]),
+                height_min: parseInt(dog.height.metric.split(' - ')[0]),
+                height_max: parseInt(dog.height.metric.split(' - ')[1]),
                 life_span: dog.life_span,
                 createdInDb: dog.createdInDb,
                 temperament: dog.temperament  ? dog.temperament.split(', ') : [],
@@ -72,16 +78,20 @@ const newDogDB = async (image, name, height_min, height_max, weight_min, weight_
 };
 
 const getTemperaments = async () => {
-    const temperamentDB = await Temperament.findAll();
     const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
     const temperamentApiFilter = temperamentApi.data.map(dog => {
-        return dog.temperament ? dog.temperament.split(', ') : [];
+        return dog.temperament ? dog.temperament.split(', ') : [] 
     });
-    const response = [...temperamentDB, ...temperamentApiFilter];
-    const responseFilter = response.filter(tempe => tempe != null)
-    const responseFilter2 = responseFilter.flat().sort( (a, b) => a.localeCompare(b) );
-    const setResponse = new Set(responseFilter2);
-    return [...setResponse];
+    const response = [...temperamentApiFilter];
+    const responseFilter = new Set(response.flat());
+        responseFilter.forEach(async (tempe) => {
+        await Temperament.findOrCreate({
+            where: {
+                name: tempe,
+            },
+        });
+    });
+    return [...responseFilter];
 };
 
 module.exports = {
