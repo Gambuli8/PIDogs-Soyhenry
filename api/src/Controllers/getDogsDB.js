@@ -6,7 +6,7 @@ const getDogsDB = async (name) => {
     if (name) {
         const dogDB = await Dog.findAll({
             where: {
-                name: name,
+                name,
             },
             include: {
                 model: Temperament,
@@ -33,7 +33,7 @@ const getDogsDB = async (name) => {
         });
         const response = [...dogDB,...dogApiFilter];
         return response;
-    }
+    };
 };
 
 const getAllDogs = async () => {
@@ -67,13 +67,9 @@ const getDogsDBId = async (id) => {
         return dogApi.data;
 }
 
-const newDogDB = async (image, name, height_min, height_max, weight_min, weight_max, life_span, temperaments) => {
+const newDogDB = async (image, name, height_min, height_max, weight_min, weight_max, life_span) => {
     let newDog = await Dog.create({ image, name, height_min, height_max, weight_min, weight_max, life_span });
-    let temperamentDB = await Temperament.findAll({
-        where: {
-            name: temperaments,
-        },
-    });
+    let temperamentDB = await Temperament.findAll();
     await newDog.addTemperament(temperamentDB);
     return newDog;
 };

@@ -37,7 +37,7 @@ function Cards({allDogs}) {
           image={dog.image}
           temperaments={dog.temperaments}
           />
-          ))};
+          ))}
           </div>
     </div>
   )

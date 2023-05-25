@@ -1,7 +1,7 @@
     import React from 'react';
     import style from './Filters.module.css';
     import { useSelector, useDispatch } from 'react-redux';
-    import { GetFilters, GetFilterByWeight, GetFilterCreatedDog, GetFilterByTemperament, GetAllTemperaments } from '../../Redux/Actions/Actions';
+    import { GetFilters, GetFilterByWeight, GetFilterCreatedDog, GetFilterByTemperament } from '../../Redux/Actions/Actions';
 
 export default function Filters() { 
     const allDogs = useSelector((state) => state.allDogs);
@@ -46,9 +46,9 @@ export default function Filters() {
             <option className={style.opciones} key={3} value="api">Existentes</option>
         </select>
         <select className={style.select} onChange={e => handlerFilterTemperament(e)} name="temperamentos">
-            <option defaultChecked defaultValue='0' >Temperaments</option>
+            <option defaultChecked value='All' >Temperaments</option>
             {allDogs4.map((t) => (
-                <option className={style.opciones} key={t} value={t}>{t}</option>
+                <option className={style.opciones} key={`${t}`} value={t}>{t}</option>
             ))}
         </select>
     </div>

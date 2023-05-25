@@ -8,9 +8,9 @@ const getDogByNameHandler = async (req, res) => {
         if(name) {
             const allDogsName = await getDogsDB(name);
             res.status(200).json(allDogsName);
-        } 
+        }
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json('No se encontraron perros');
     }
 };
 
@@ -27,7 +27,7 @@ const postDogHandler = async (req, res) => {
     const {image, name, height_min, height_max, weight_min, weight_max, life_span, temperament } = req.body;
     try {
         let newDog = await newDogDB(image, name, height_min, height_max, weight_min, weight_max, life_span, temperament);
-        res.status(200).json(newDog);
+        return res.status(200).json(newDog);
     } catch (error) {
         res.status(400).json(error.message)
     }

@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { GetDogsByName } from '../../Redux/Actions/Actions';
+import Paginado from '../Paginado/paginado';
 
 export let results = [];
 
-function Searchbar({paginado}) {
+function Searchbar() {
 
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -20,7 +21,7 @@ function Searchbar({paginado}) {
 
   const handlerinputChange = (e) => {
     e.preventDefault();
-    setName(e.target.value);
+      setName(e.target.value);
   };
 
   const handlerSubmit = (e) => {
