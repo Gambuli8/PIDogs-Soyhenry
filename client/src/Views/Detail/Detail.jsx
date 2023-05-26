@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import style from './Detail.module.css';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 function Detail() {
 
+  //Aca me traigo el estado global
   const allDogs = useSelector((state) => state.allDogs);
 
+  //estado local
   const [dog, setDog] = useState({});
+
+  //Aca me traigo el nombre que se pasa por params
   const {name} = useParams();
 
   useEffect(() => {

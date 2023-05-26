@@ -14,13 +14,9 @@ let inicialState = {
     allTemperaments: [],
     newDogs: [],
     dogsFilter: [],
-    filtered: false
 };
 
 // dogsFilter es una copia de allDogs, que se va a modificar con los filtros
-// filtered es un booleano que indica si se aplicaron filtros o no
-
-console.log(inicialState.allTemperaments);
 
 function rootReducer (state = inicialState, action){
     switch(action.type){

@@ -6,7 +6,7 @@ const getDogsDB = async (name) => {
     if (name) {
         const dogDB = await Dog.findAll({
             where: {
-                name,
+                name
             },
             include: {
                 model: Temperament,

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './Create.module.css';
 import { GetNewDogs } from '../../Redux/Actions/Actions';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -43,132 +42,132 @@ function Create() {
 
   // esta funcion se encarga de validar los datos que se ingresan en los inputs
   const [Errors, setErrors] = useState({
-    name: 'Raza ',
-    weight_min: 'Peso minimo ',
-    weight_max: 'Peso maximo',
-    height_min: 'Altura minima ',
-    height_max: 'Altura maxima',
-    life_span: 'Años de vida ',
-    image: ' url de la Imagen ',
-    temperaments: 'Temperamentos ',
+    name: 'Raza requerida ',
+    weight_min: 'Peso minimo requerida ',
+    weight_max: 'Peso maximo requerida',
+    height_min: 'Altura minima requerida ',
+    height_max: 'Altura maxima requerida',
+    life_span: 'Años de vida requerida ',
+    image: ' url de la Imagen requerida ',
+    temperaments: 'Temperamentos requerida ',
   });
 
   //! VALIDACIONES
   const validate = (input, name) => {
     if(name === 'name') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'Raza requerida',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'Raza requerida',
         });
       };
       return;
     };
     if(name === 'weight_min') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'Peso minimo requerido',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'Peso minimo requerido',
         });
       };
       return;
     };
 
     if(name === 'weight_max') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'Peso maximo requerido',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'Peso maximo requerido',
         });
       };
       return;
     };
 
     if(name === 'height_min') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'Altura minima requerida',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'Altura minima requerida',
         });
       };
       return;
     };
 
     if(name === 'height_max') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'Altura maxima requerida',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'Altura maxima requerida',
         });
       };
       return;
     };
 
     if(name === 'life_span') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'Años de vida requeridos',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'Años de vida requeridos',
         });
       };
       return;
     };
 
     if(name === 'image') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'url de la Imagen requerida',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'url de la Imagen requerida',
         });
       };
       return;
     };
 
     if(name === 'temperaments') {
-      if (input === '') {
+      if (input.name !== '') {
         setErrors({
         ...Errors,
-          [name]: 'Temperamentos requeridos',
+          [name]: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: '',
+          [name]: 'Temperamentos requeridos',
         });
       };
       return;
