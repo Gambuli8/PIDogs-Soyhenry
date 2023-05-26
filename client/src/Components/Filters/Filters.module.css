@@ -6,16 +6,18 @@
     margin: 0 5px;
     margin-top: 5px;
     cursor: pointer;
-    font-size: 20px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     border: none;
 }
 
 .select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     border: 1px solid #330867;
@@ -24,7 +26,11 @@
 }
 
 .opciones{
-    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     border: 1px solid #30cfd0;

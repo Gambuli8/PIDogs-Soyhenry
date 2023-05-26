@@ -57,16 +57,6 @@ const getAllDogs = async () => {
     return response;
 };
 
-const getDogsDBId = async (id) => {
-    // id de la base de datos son numeros y letras y el id de la api son solo numeros 
-    if(isNaN(id)){
-        const dogDB = await Dog.findByPk(id);
-        return dogDB;
-    }
-        const dogApi = await axios.get(`https://api.thedogapi.com/v1/breeds/${id}?api_key=${API_KEY}`);
-        return dogApi.data;
-}
-
 const newDogDB = async (image, name, height_min, height_max, weight_min, weight_max, life_span) => {
     let newDog = await Dog.create({ image, name, height_min, height_max, weight_min, weight_max, life_span });
     let temperamentDB = await Temperament.findAll();
@@ -81,7 +71,7 @@ const getTemperaments = async () => {
     });
     const response = [...temperamentApiFilter];
     const responseFilter = new Set(response.flat());
-        responseFilter.forEach(async (tempe) => {
+    responseFilter.forEach(async (tempe) => {
         await Temperament.findOrCreate({
             where: {
                 name: tempe,
@@ -93,10 +83,21 @@ const getTemperaments = async () => {
     return tempeMap;
 };
 
+
+
+// const getDogsDBId = async (id) => {
+    // id de la base de datos son numeros y letras y el id de la api son solo numeros 
+//     if(isNaN(id)){
+//         const dogDB = await Dog.findByPk(id);
+//         return dogDB;
+//     }
+//         const dogApi = await axios.get(`https://api.thedogapi.com/v1/breeds/${id}?api_key=${API_KEY}`);
+//         return dogApi.data;
+// }
+
 module.exports = {
     getAllDogs,
     getDogsDB,
-    getDogsDBId,
     newDogDB,
     getTemperaments,
 };

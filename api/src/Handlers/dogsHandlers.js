@@ -1,5 +1,5 @@
 const e = require('express');
-const { getAllDogs ,getDogsDB, getDogsDBId, newDogDB } = require('../Controllers/getDogsDB.js');
+const { getAllDogs ,getDogsDB, newDogDB } = require('../Controllers/getDogsDB.js');
 
 //query --> /dogs?name=perro
 const getDogByNameHandler = async (req, res) => {
@@ -33,19 +33,18 @@ const postDogHandler = async (req, res) => {
     }
 };
 
-const getDogByIdHandler = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const dog = await getDogsDBId(id); 
-        res.status(200).json(dog);
-    } catch (error) {
-        res.status(400).json('No se encontró el perro');
-    }
-};
+// const getDogByIdHandler = async (req, res) => {
+//     const { id } = req.params;
+//     try {
+//         const dog = await getDogsDBId(id); 
+//         res.status(200).json(dog);
+//     } catch (error) {
+//         res.status(400).json('No se encontró el perro');
+//     }
+// };
 
 module.exports = {
     getDogAllHandler,
     getDogByNameHandler,
-    getDogByIdHandler,
     postDogHandler,
 };
